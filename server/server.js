@@ -4,6 +4,9 @@ const cors = require('cors');
 
 require('dotenv').config();
 
+const documentRoutes = require('./routes/documents');
+const userRoutes = require('./routes/users');
+
 //Set app
 const app = express();
 
@@ -11,10 +14,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-//Test server
-app.get('/', (req, res) => {
-  res.send('Hello');
-});
+//Using routes
+
+app.use('/api/documents', documentRoutes);
+app.use('/api/user', userRoutes);
 
 //MongoDB & Server connection
 mongoose
