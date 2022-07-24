@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { signin, signup } from '../../actions/auth';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import Spinner from '../../components/Spinner/Spinner';
+import './Login.css';
 
 const initialState = {
   email: '',

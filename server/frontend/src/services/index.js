@@ -21,7 +21,7 @@ export const signUp = (formData) => API.post(`/api/user/signup`, formData);
 
 //DOCUMENTS SERVICES
 export const fetchDocuments = () => API.get(`/api/documents`);
-export const fetchDocument = (id) => API.getDocument(`/api/documents/${id}`);
+export const fetchDocument = (id) => API.get(`/api/documents/${id}`);
 export const createDocument = (newDocument) =>
   API.post('/api/documents', newDocument);
 export const updateDocument = (id, updateDocument) =>

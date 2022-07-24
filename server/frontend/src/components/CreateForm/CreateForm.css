@@ -1,3 +1,7 @@
+.createForm__container {
+  height: 100vh;
+}
+
 .createForm {
   display: flex;
   justify-content: center;

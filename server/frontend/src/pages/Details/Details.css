@@ -3,6 +3,10 @@
   margin-top: 40px;
 }
 
+.details__title__span {
+  text-decoration: underline;
+}
+
 .details__container {
   width: 80%;
   display: flex;
@@ -14,6 +18,16 @@
 }
 
 .details__list {
-  width: 450px;
+  width: 650px;
   margin-top: 40px;
+}
+
+.details__span {
+  float: right;
+}
+
+@media screen and (max-width: 450px) {
+  .details__list {
+    max-width: 380px;
+  }
 }

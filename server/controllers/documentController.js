@@ -3,22 +3,10 @@ const Document = require('../models/document');
 require('dotenv').config();
 
 exports.getDocuments = async (req, res) => {
-  const { page } = req.query;
-
   try {
-    const LIMIT = 8;
-    const startIndex = (Number(page) - 1) * LIMIT;
-
-    const total = await Document.countDocuments({});
-    const documents = await Document.find()
-      .sort({ _id: -1 })
-      .limit(LIMIT)
-      .skip(startIndex);
-
+    const documents = await Document.find().sort({ createdAt: -1 });
     res.json({
       data: documents,
-      currentPage: Number(page),
-      numberOfPages: Math.ceil(total / LIMIT),
     });
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -45,6 +33,8 @@ exports.createDocument = async (req, res) => {
     creator: req.userId,
     createdAt: new Date().toISOString(),
   });
+
+  console.log(newDocument);
 
   try {
     await newDocument.save();

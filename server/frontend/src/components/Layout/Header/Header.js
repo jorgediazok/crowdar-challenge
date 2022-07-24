@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -18,8 +19,6 @@ const Header = () => {
     setUser(null);
   };
 
-  console.log(user);
-
   useEffect(() => {
     const token = user?.token;
     if (token) {
@@ -28,7 +27,6 @@ const Header = () => {
       if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
     setUser(JSON.parse(localStorage.getItem('profile')));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location, user?.token]);
 
   return (
