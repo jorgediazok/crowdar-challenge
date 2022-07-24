@@ -1,0 +1,19 @@
+.details__title {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.details__container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.details__list {
+  width: 450px;
+  margin-top: 40px;
+}

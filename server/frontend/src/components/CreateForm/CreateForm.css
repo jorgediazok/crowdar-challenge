@@ -23,8 +23,10 @@
 }
 
 .createForm__button {
+  display: flex;
+  align-items: center;
   border-radius: 5px;
-  padding: 5px 15px;
+  padding: 8px 30px;
   background: #899878;
   outline: none;
   color: #f7f7f2;

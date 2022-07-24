@@ -14,7 +14,7 @@ const Search = () => {
         className='form-control form-control-sm mr-3 shadow-none w-75 searchInput'
         type='text'
         ref={inputRef}
-        placeholder='Search'
+        placeholder='Buscar por Nombre'
         aria-label='Search'
       />
       <i className='fas fa-search' aria-hidden='true'></i>
