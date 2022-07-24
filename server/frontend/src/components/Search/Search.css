@@ -1,0 +1,19 @@
+.searchForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  width: 450px;
+  gap: 10px;
+}
+
+.searchInput:focus {
+  outline: 0px none #fff !important;
+  -webkit-appearance: none;
+}
+
+@media screen and (max-width: 450px) {
+  .searchForm {
+    width: 350px;
+  }
+}

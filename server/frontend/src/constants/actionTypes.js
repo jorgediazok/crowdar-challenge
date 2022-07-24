@@ -1,0 +1,10 @@
+//AUTH
+export const AUTH = 'AUTH';
+export const LOGOUT = 'LOGOUT';
+
+//DOCUMENTS
+export const FETCH_DOCUMENTS = 'FETCH_DOCUMENTS';
+export const FETCH_DOCUMENT = 'FETCH_DOCUMENT';
+export const CREATE_DOCUMENT = 'CREATE_DOCUMENT';
+export const UPDATE_DOCUMENT = 'UPDATE_DOCUMENT';
+export const DELETE_DOCUMENT = 'DELETE_DOCUMENT';

@@ -1,0 +1,11 @@
+.footerContainer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #191919;
+  color: #f7f7f2;
+}
+
+.footerDev {
+  color: #f7f7f2;
+}

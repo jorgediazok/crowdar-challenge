@@ -1,0 +1,101 @@
+.login {
+  max-height: 800px;
+  background: #121113;
+}
+
+.container__row {
+  background: #f7f7f2;
+  border-radius: 30px;
+}
+
+.login img {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  border-right: 3px solid #121113;
+}
+
+.login h1 {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #121113;
+}
+
+.input__email,
+.input__password {
+  height: 50px;
+  width: 70%;
+  border: none;
+  outline: none;
+  border-radius: 60px;
+  box-shadow: -1px 1px 30px -11px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -1px 1px 30px -11px (rgba(0, 0, 0, 0.75));
+  -moz-box-shadow: -1px 1px 30px -11px (rgba(0, 0, 0, 0.75));
+}
+
+.btn__login {
+  margin-top: 40px !important;
+  background-color: #899878;
+  color: #f7f7f2;
+  font-weight: bold;
+  display: flex;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2em;
+  outline: none;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.btn__login:hover {
+  background-color: #222725;
+}
+
+.login__account {
+  margin-top: 100px !important;
+  color: #121113;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login__account__container {
+  margin-top: 30px;
+  margin-left: 25px;
+  margin-bottom: -30px;
+}
+
+@media screen and (max-width: 450px) {
+  form {
+    margin-left: -15px;
+  }
+
+  .btn__login {
+    padding: 0.7em;
+  }
+
+  .login {
+    max-height: 1150px;
+  }
+
+  .login img {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 30px;
+    border-right: none;
+  }
+
+  .login h1 {
+    font-size: 1.2em;
+    margin-top: -50px;
+  }
+
+  .login__account {
+    font-size: 12px;
+  }
+}

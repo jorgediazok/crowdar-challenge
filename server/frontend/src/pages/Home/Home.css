@@ -1,0 +1,36 @@
+.home {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 85%;
+  margin-top: 30px;
+}
+
+.home__actions__create {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 5px 15px;
+  background: #899878;
+  outline: none;
+  color: #f7f7f2;
+  border: none;
+}
+
+.home__actions__create:hover {
+  background-color: #222725;
+}
+
+.fa-plus {
+  color: #f7f7f2;
+  margin-left: 5px;
+}
