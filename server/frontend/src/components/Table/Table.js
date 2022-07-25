@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FcViewDetails } from 'react-icons/fc';
 import { ImFolderDownload } from 'react-icons/im';
@@ -8,10 +9,12 @@ import moment from 'moment';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Table.css';
+import Search from '../Search/Search';
 
 const Table = () => {
   const { documents } = useSelector((state) => state.documents);
   const dispatch = useDispatch();
+  const [query, setQuery] = useState('');
   toast.configure();
   const notify = () => {
     toast('Documento eliminado.', { position: toast.POSITION.TOP_LEFT });
@@ -22,8 +25,24 @@ const Table = () => {
     notify();
   };
 
+  const filteredDocuments = documents?.filter((document) => {
+    if (query === '') {
+      return document;
+    } else {
+      return document.name.toLowerCase().includes(query);
+    }
+  });
+
   return (
     <>
+      <div className='home__actions'>
+        <Search query={query} setQuery={setQuery} />
+        <Link to='/crear'>
+          <button className='home__actions__create'>
+            Crear <i className='fa fa-plus' />
+          </button>
+        </Link>
+      </div>
       <table className='table tableContainer'>
         <thead className='thead-dark'>
           <tr>
@@ -38,14 +57,19 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {documents?.map((document) => (
+          {filteredDocuments?.map((document) => (
             <tr key={document._id}>
               <th scope='row'>{document.name}</th>
               <td>{moment(document.createdAt).format('LL')}</td>
               <td>{document.type}</td>
               <td>{document.owner}</td>
               <td>
-                <ImFolderDownload size={25} style={{ cursor: 'pointer' }} />
+                <a download={document.name} href={document.file}>
+                  <ImFolderDownload
+                    size={25}
+                    style={{ cursor: 'pointer', color: 'black' }}
+                  />
+                </a>
               </td>
               <td>
                 <Link to={`/${document._id}`}>
@@ -53,7 +77,9 @@ const Table = () => {
                 </Link>
               </td>
               <td>
-                <AiFillEdit size={25} style={{ cursor: 'pointer' }} />
+                <Link to={`/editar/${document._id}`}>
+                  <AiFillEdit size={25} style={{ cursor: 'pointer' }} />
+                </Link>
               </td>
               <td>
                 <AiFillDelete

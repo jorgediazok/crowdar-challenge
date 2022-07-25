@@ -12,17 +12,19 @@ const Details = () => {
   const dispatch = useDispatch();
   const { document } = useSelector((state) => state.documents);
 
-  console.log(document);
-
   useEffect(() => {
     dispatch(fetchDocument(id));
+
+    return () => {};
   }, [id, dispatch]);
 
   return (
     <Auth>
       <h3 className='details__title'>
         Detalles de{' '}
-        <span className='details__title__span'>{document?.name}</span>
+        <a download={document?.name} href={document?.file}>
+          <span className='details__title__span'>{document?.name}</span>
+        </a>
       </h3>
       <div className='details__container'>
         <ul className='list-group details__list'>

@@ -1,26 +1,33 @@
-import { useState } from 'react';
 import FileBase from 'react-file-base64';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { createDocument } from '../../services';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { fetchDocument } from '../../actions/documents';
+import { updateDocument } from '../../actions/documents';
+import Spinner from '../../components/Spinner/Spinner';
 
-import './CreateForm.css';
-import Spinner from '../Spinner/Spinner';
-
-const initialState = {
-  name: '',
-  file: '',
-  type: '',
-  owner: '',
-  description: '',
-};
-
-const CreateForm = () => {
-  const [documentData, setDocumentData] = useState(initialState);
-  const [loading, setLoading] = useState(false);
+const Edit = () => {
+  const { id } = useParams();
+  const [user] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [user] = useState(JSON.parse(localStorage.getItem('profile')));
+  const { document } = useSelector((state) => state.documents);
+  const [loading, setLoading] = useState(false);
+  const [documentData, setDocumentData] = useState({
+    name: '',
+    file: '',
+    type: '',
+    owner: '',
+    description: '',
+  });
+
+  console.log(document);
+
+  useEffect(() => {
+    dispatch(fetchDocument(id));
+
+    return () => console.log('clean');
+  }, [id, dispatch]);
 
   const handleChange = (e) =>
     setDocumentData({ ...documentData, [e.target.name]: e.target.value });
@@ -28,7 +35,8 @@ const CreateForm = () => {
   const handleSubmit = (e) => {
     setLoading(true);
     e.preventDefault();
-    dispatch(createDocument(documentData, navigate));
+    dispatch(updateDocument(id, documentData));
+    navigate('/');
     setLoading(false);
   };
 
@@ -37,7 +45,7 @@ const CreateForm = () => {
   return (
     <div className='createForm__container'>
       <div className='createForm'>
-        <h4 className='createForm__title'>Crear Documento</h4>
+        <h4 className='createForm__title'>Editar Documento</h4>
         <form onSubmit={handleSubmit}>
           <div className='mb-3'>
             <label className='form-label'>Nombre del Documento</label>
@@ -46,6 +54,7 @@ const CreateForm = () => {
               className='form-control'
               id='name'
               name='name'
+              defaultValue={document?.name}
               onChange={handleChange}
             />
           </div>
@@ -56,6 +65,7 @@ const CreateForm = () => {
               type='file'
               multiple={false}
               className='form-control'
+              defaultValue={document?.file}
               id='file'
               name='file'
               onDone={({ base64 }) =>
@@ -71,6 +81,7 @@ const CreateForm = () => {
             <select
               className='form-control'
               name='type'
+              defaultValue={document?.type}
               onChange={handleChange}
             >
               <option></option>
@@ -101,6 +112,7 @@ const CreateForm = () => {
             <textarea
               type='text'
               name='description'
+              defaultValue={document?.description}
               className='form-control'
               id='description'
               onChange={handleChange}
@@ -109,7 +121,7 @@ const CreateForm = () => {
 
           <div className='createForm__button__container'>
             <button type='submit' className='btn createForm__button'>
-              Crear
+              Editar
             </button>
           </div>
         </form>
@@ -118,4 +130,4 @@ const CreateForm = () => {
   );
 };
 
-export default CreateForm;
+export default Edit;

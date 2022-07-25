@@ -28,10 +28,11 @@ export const fetchDocument = (id) => async (dispatch) => {
   }
 };
 
-export const createDocument = (document) => async (dispatch) => {
+export const createDocument = (document, navigate) => async (dispatch) => {
   try {
     const { data } = await API.createDocument(document);
     dispatch({ type: CREATE_DOCUMENT, payload: data });
+    navigate('/');
   } catch (error) {
     console.log(error);
   }

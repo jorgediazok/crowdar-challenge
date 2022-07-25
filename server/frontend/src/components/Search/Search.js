@@ -1,8 +1,10 @@
 import { useRef, useEffect } from 'react';
 import './Search.css';
 
-const Search = () => {
+const Search = ({ query, setQuery }) => {
   const inputRef = useRef();
+
+  console.log(query);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -16,6 +18,7 @@ const Search = () => {
         ref={inputRef}
         placeholder='Buscar por Nombre'
         aria-label='Search'
+        onChange={(e) => setQuery(e.target.value.toLowerCase())}
       />
       <i className='fas fa-search' aria-hidden='true'></i>
     </form>
