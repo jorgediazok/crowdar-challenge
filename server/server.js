@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const multer = require('multer');
+const path = require('path');
 const cors = require('cors');
 
 require('dotenv').config();
@@ -16,6 +16,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
+app.use(express.static('frontend/build/'));
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+});
 
 //Using routes
 
@@ -28,7 +32,10 @@ mongoose
   .then(() => {
     //SERVER
     app.listen(process.env.PORT, () =>
-      console.log('Connected to DB & listening on Port', process.env.PORT)
+      console.log(
+        'Connected to DB & listening on Port',
+        process.env.PORT || 5000
+      )
     );
   })
   .catch((error) => {
