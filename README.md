@@ -1,6 +1,6 @@
 # crowdar-challenge
 
-PARA CORRER EL PROYECTO
+PARA TESTEAR EL PROYECTO
 1) Ingresar a: https://crowdar-challenge.herokuapp.com/
 
 2) Registrarse clickeando en donde dice registrarse o bien loguearse con este mail y contraseña de ejemplos: 
