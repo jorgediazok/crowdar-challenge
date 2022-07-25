@@ -57,7 +57,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredDocuments.length === 0 ? (
+          {filteredDocuments?.length === 0 ? (
             <tr>
               <td>No hay documentos con ese nombre</td>
             </tr>
