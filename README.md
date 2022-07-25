@@ -4,10 +4,11 @@ PARA CORRER EL PROYECTO
 1) Ingresar a: https://crowdar-challenge.herokuapp.com/
 
 2) Registrarse clickeando en donde dice registrarse o bien loguearse con este mail y contraseña de ejemplos: 
+
    email: testing@testing.com   
    password: testing
 
-3) Una vez adentro probar todas las funcionalidades: Borrar, Editar, Crear, Ver Detalles y Descargar Archivo
+3) Una vez adentro probar todas las funcionalidades: Buscar por nombre, Borrar, Editar, Crear, Ver Detalles y Descargar Archivo
 
 PARA CORRER EL PROYECTO EN LOCAL
 1)Clonar el proyecto: git clone  https://github.com/jorgediazok/crowdar-challenge/
