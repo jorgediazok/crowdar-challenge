@@ -14,13 +14,18 @@ const documentsReducer = (state = initialState, action) => {
     case actionType.FETCH_DOCUMENT:
       return { ...state, document: action.payload.document };
     case actionType.CREATE_DOCUMENT:
-      return { ...state, documents: [...state.documents, action.payload] };
+      return {
+        ...state,
+        documents: [...state.documents, action.payload],
+        documentCreated: true,
+      };
     case actionType.UPDATE_DOCUMENT:
       return {
         ...state,
         documents: state.documents.map((document) =>
           document._id === action.payload._id ? action.payload : document
         ),
+        documentEdited: true,
       };
     case actionType.DELETE_DOCUMENT:
       return {

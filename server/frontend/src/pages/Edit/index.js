@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchDocument } from '../../actions/documents';
+import { validate } from '../../utils/validations';
 import { updateDocument } from '../../actions/documents';
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -11,7 +12,10 @@ const Edit = () => {
   const [user] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { document } = useSelector((state) => state.documents);
+  const { document: initialDocument } = useSelector((state) => state.documents);
+  const documentIsEdited = useSelector(
+    (state) => state.documents.documentEdited
+  );
   const [loading, setLoading] = useState(false);
   const [documentData, setDocumentData] = useState({
     name: '',
@@ -21,24 +25,44 @@ const Edit = () => {
     description: '',
   });
 
-  console.log(document);
-
   useEffect(() => {
     dispatch(fetchDocument(id));
-
     return () => console.log('clean');
   }, [id, dispatch]);
 
-  const handleChange = (e) =>
+  useEffect(() => {
+    setDocumentData({
+      name: initialDocument?.name,
+      file: initialDocument?.file,
+      type: initialDocument?.type,
+      owner: initialDocument?.owner,
+      description: initialDocument?.description,
+    });
+  }, [
+    initialDocument?.description,
+    initialDocument?.file,
+    initialDocument?.name,
+    initialDocument?.owner,
+    initialDocument?.type,
+  ]);
+
+  const handleChange = (e) => {
+    console.log(e.target.value);
     setDocumentData({ ...documentData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
     dispatch(updateDocument(id, documentData));
-    navigate('/');
-    setLoading(false);
   };
+
+  useEffect(() => {
+    if (documentIsEdited && loading) {
+      setLoading(false);
+      navigate('/');
+    }
+  }, [documentIsEdited, loading, navigate]);
 
   if (loading) return <Spinner />;
 
@@ -54,7 +78,7 @@ const Edit = () => {
               className='form-control'
               id='name'
               name='name'
-              defaultValue={document?.name}
+              value={documentData?.name}
               onChange={handleChange}
             />
           </div>
@@ -65,7 +89,7 @@ const Edit = () => {
               type='file'
               multiple={false}
               className='form-control'
-              defaultValue={document?.file}
+              value={documentData?.file}
               id='file'
               name='file'
               onDone={({ base64 }) =>
@@ -81,7 +105,7 @@ const Edit = () => {
             <select
               className='form-control'
               name='type'
-              defaultValue={document?.type}
+              value={documentData?.type}
               onChange={handleChange}
             >
               <option></option>
@@ -98,6 +122,7 @@ const Edit = () => {
             <select
               className='form-control'
               name='owner'
+              value={documentData?.value}
               onChange={handleChange}
             >
               <option></option>
@@ -112,7 +137,7 @@ const Edit = () => {
             <textarea
               type='text'
               name='description'
-              defaultValue={document?.description}
+              value={documentData?.description}
               className='form-control'
               id='description'
               onChange={handleChange}

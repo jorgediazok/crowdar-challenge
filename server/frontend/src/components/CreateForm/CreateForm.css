@@ -41,3 +41,7 @@
   background-color: #222725;
   color: #f7f7f2;
 }
+
+.createForm__errors {
+  color: red;
+}

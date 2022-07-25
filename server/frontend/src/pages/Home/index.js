@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
-import Search from '../../components/Search/Search';
+import { useEffect } from 'react';
 import Table from '../../components/Table/Table';
 import Auth from '../../auth/Auth';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { fetchDocuments } from '../../actions/documents';
 import './Home.css';
 
@@ -12,7 +10,6 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchDocuments());
-    return () => {};
   }, [dispatch]);
 
   return (

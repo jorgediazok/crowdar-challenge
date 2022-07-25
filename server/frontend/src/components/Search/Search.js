@@ -4,8 +4,6 @@ import './Search.css';
 const Search = ({ query, setQuery }) => {
   const inputRef = useRef();
 
-  console.log(query);
-
   useEffect(() => {
     inputRef.current.focus();
   }, []);

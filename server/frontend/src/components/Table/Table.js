@@ -57,39 +57,45 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredDocuments?.map((document) => (
-            <tr key={document._id}>
-              <th scope='row'>{document.name}</th>
-              <td>{moment(document.createdAt).format('LL')}</td>
-              <td>{document.type}</td>
-              <td>{document.owner}</td>
-              <td>
-                <a download={document.name} href={document.file}>
-                  <ImFolderDownload
-                    size={25}
-                    style={{ cursor: 'pointer', color: 'black' }}
-                  />
-                </a>
-              </td>
-              <td>
-                <Link to={`/${document._id}`}>
-                  <FcViewDetails size={25} style={{ cursor: 'pointer' }} />
-                </Link>
-              </td>
-              <td>
-                <Link to={`/editar/${document._id}`}>
-                  <AiFillEdit size={25} style={{ cursor: 'pointer' }} />
-                </Link>
-              </td>
-              <td>
-                <AiFillDelete
-                  size={25}
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => removeDocument(document._id)}
-                />
-              </td>
+          {filteredDocuments.length === 0 ? (
+            <tr>
+              <td>No hay documentos con ese nombre</td>
             </tr>
-          ))}
+          ) : (
+            filteredDocuments?.map((document) => (
+              <tr key={document._id}>
+                <th scope='row'>{document.name}</th>
+                <td>{moment(document.createdAt).format('LL')}</td>
+                <td>{document.type}</td>
+                <td>{document.owner}</td>
+                <td>
+                  <a download={document.name} href={document.file}>
+                    <ImFolderDownload
+                      size={25}
+                      style={{ cursor: 'pointer', color: 'black' }}
+                    />
+                  </a>
+                </td>
+                <td>
+                  <Link to={`/${document._id}`}>
+                    <FcViewDetails size={25} style={{ cursor: 'pointer' }} />
+                  </Link>
+                </td>
+                <td>
+                  <Link to={`/editar/${document._id}`}>
+                    <AiFillEdit size={25} style={{ cursor: 'pointer' }} />
+                  </Link>
+                </td>
+                <td>
+                  <AiFillDelete
+                    size={25}
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => removeDocument(document._id)}
+                  />
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </>

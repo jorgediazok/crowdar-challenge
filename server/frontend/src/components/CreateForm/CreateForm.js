@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FileBase from 'react-file-base64';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { createDocument } from '../../services';
-
-import './CreateForm.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { createDocument } from '../../actions/documents';
+import { validate } from '../../utils/validations';
 import Spinner from '../Spinner/Spinner';
+import './CreateForm.css';
 
 const initialState = {
   name: '',
@@ -17,20 +17,35 @@ const initialState = {
 
 const CreateForm = () => {
   const [documentData, setDocumentData] = useState(initialState);
+  const [formErrors, setFormErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [user] = useState(JSON.parse(localStorage.getItem('profile')));
+  const newDocumentCreated = useSelector(
+    (state) => state.documents.documentCreated
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [user] = useState(JSON.parse(localStorage.getItem('profile')));
 
   const handleChange = (e) =>
     setDocumentData({ ...documentData, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
-    setLoading(true);
     e.preventDefault();
-    dispatch(createDocument(documentData, navigate));
-    setLoading(false);
+    const result = validate(documentData);
+    if (Object.keys(result).length > 0) {
+      setFormErrors(result);
+      return;
+    }
+    setLoading(true);
+    dispatch(createDocument(documentData));
   };
+
+  useEffect(() => {
+    if (newDocumentCreated && loading) {
+      setLoading(false);
+      navigate('/');
+    }
+  }, [newDocumentCreated, loading, navigate]);
 
   if (loading) return <Spinner />;
 
@@ -48,6 +63,7 @@ const CreateForm = () => {
               name='name'
               onChange={handleChange}
             />
+            <p className='createForm__errors'>{formErrors.name}</p>
           </div>
 
           <div className='mb-3'>
@@ -62,6 +78,7 @@ const CreateForm = () => {
                 setDocumentData({ ...documentData, file: base64 })
               }
             />
+            <p className='createForm__errors'>{formErrors.file}</p>
           </div>
 
           <div className='mb-3'>
@@ -78,6 +95,7 @@ const CreateForm = () => {
               <option>Privado</option>
               <option>Draft</option>
             </select>
+            <p className='createForm__errors'>{formErrors.type}</p>
           </div>
 
           <div className='mb-3'>
@@ -92,6 +110,7 @@ const CreateForm = () => {
               <option></option>
               <option value={user?.result?._id}>{user?.result.email}</option>
             </select>
+            <p className='createForm__errors'>{formErrors.owner}</p>
           </div>
 
           <div className='mb-3'>
