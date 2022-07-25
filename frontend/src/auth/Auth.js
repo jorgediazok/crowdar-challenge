@@ -8,7 +8,7 @@ const Auth = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('profile');
-    if (token === '') {
+    if (!token) {
       navigate('/login');
     }
   }, [navigate]);
