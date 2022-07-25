@@ -11,6 +11,7 @@ PARA CORRER EL PROYECTO
 3) Una vez adentro probar todas las funcionalidades: Buscar por nombre, Borrar, Editar, Crear, Ver Detalles y Descargar Archivo
 
 PARA CORRER EL PROYECTO EN LOCAL
+
 1)Clonar el proyecto: git clone  https://github.com/jorgediazok/crowdar-challenge/
 
 2)"Npm install" sobre la raíz del proyecto //Instalar las dependencias del back en manera local
