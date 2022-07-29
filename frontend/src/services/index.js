@@ -3,7 +3,7 @@ import axios from 'axios';
 // const apiUrl = process.env.REACT_APP_APIURL;
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://crowdar-challenge.herokuapp.com',
 });
 
 API.interceptors.request.use((req) => {
